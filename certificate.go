@@ -78,10 +78,9 @@ func UpdateCertificate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i, certificate := range certificates {
-		if certificate.ID == id {
-			// Update the certificate data
+		if certificate.ID == id {
 			certificates[i] = updatedCertificate
-			certificates[i].ID = id // Ensure the ID remains the same
+			certificates[i].ID = id 
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(certificates[i])
 			return
@@ -97,10 +96,10 @@ func main() {
 
 	r := mux.NewRouter()
 
-	r.HandleFunc("/certificates/{id}", GetCertificateByID).Methods("GET") // Get certificate by ID
-	r.HandleFunc("/certificates", CreateCertificate).Methods("POST")      // Create new certificate
-	r.HandleFunc("/certificates", GetAllCertificates).Methods("GET")      // Get all certificates
-	r.HandleFunc("/certificates/{id}", UpdateCertificate).Methods("PUT")  // Update certificate
+	r.HandleFunc("/certificates/{id}", GetCertificateByID).Methods("GET") 
+	r.HandleFunc("/certificates", CreateCertificate).Methods("POST")    
+	r.HandleFunc("/certificates", GetAllCertificates).Methods("GET")      
+	r.HandleFunc("/certificates/{id}", UpdateCertificate).Methods("PUT") 
 
 	fmt.Println("Server is running on port 8000...")
 	log.Fatal(http.ListenAndServe(":8000", r))
